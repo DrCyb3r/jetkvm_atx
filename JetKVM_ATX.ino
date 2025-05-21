@@ -39,8 +39,6 @@ void loop() {
   serial_input.replace("\r", "");
   serial_input.replace("\n", "");
   
-  if(serial_input != ""){Serial.println(serial_input + "L");}
-  
   if (serial_input.length() >0){
     //Case 1: Request to push power button
     if (serial_input == "BTN_PWR_ON"){
