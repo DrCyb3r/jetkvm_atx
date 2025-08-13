@@ -8,7 +8,10 @@ A logic level shifter for both data lines (TX and RX) is recommended to convert 
 
 The KVM has a web interface where you can push the power and reset button and view the state of the power and HDD LED. After you release the button in the browser, the KVM will send out an ON command and a few milliseconds later an OFF command.
 So you can't use a too slow chip on the other end or code that has a lot of delays.
-You also can't decide how long you want to press any button, it's always around 50ms. So there is no option to long-press the power button to turn the PC completely off.
+
+When I analysed the protocol, I didn't find a way to trigger a long power button press to force a shutdown and it was always around 50ms.
+The user u/techlobo discovered, that there are values for a long and short press in the JetKVMs source code, so there may be an option to do this (See Issue #1).
+
 As for the LED side, the extension board will send a row of numbers back to the KVM after anything changed.
 That means it creates a response if any LED changes its state or if it pressed a button.
 
@@ -32,4 +35,5 @@ The default state (not connect to anything) is 1100. Again this response is foll
 The extension has no way to detect the actual state of the buttons, so every response regarding the buttons is coming straight from the software.
 
 As you can see it's a very simple but functioning protocol that's easy to implement.
+
 With a bit of modification to the web interface, you could control how long the button is pressed, but there is no way to configurate this at the moment, even if it would be supported by the hardware and protocol.
